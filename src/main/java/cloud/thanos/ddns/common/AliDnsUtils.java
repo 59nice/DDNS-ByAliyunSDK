@@ -42,7 +42,7 @@ public class AliDnsUtils {
     public static boolean updateResolveRecord(Domain domain) {
         UpdateDomainRecordRequest updateRequest = new UpdateDomainRecordRequest();
         // 初始化更新域名解析的类
-        updateRequest.setType("A");
+        updateRequest.setType(domain.getType());
         // 设置新的 IP
         updateRequest.setValue(domain.getRecordValue());
         // 域名
