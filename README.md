@@ -1,5 +1,5 @@
 # DDNS-ByAliyunSDK
-使用阿里云DNS SDK实现域名的动态更新。
+使用阿里云DNS SDK实现域名解析的动态更新。
 
 **技术说明：**
 
