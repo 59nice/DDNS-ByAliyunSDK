@@ -1,4 +1,4 @@
-package cloud.thanos.ddns.config;
+package cloud.thanos.ddns.web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;

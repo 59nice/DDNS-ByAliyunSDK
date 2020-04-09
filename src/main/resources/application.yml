@@ -1,4 +1,4 @@
 server:
-  port: 8080
+  port: 8848
   servlet:
-    context-path: /ddns-api
+    context-path: /ddns

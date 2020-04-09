@@ -1,15 +1,19 @@
 package cloud.thanos.ddns.common;
 
-import cloud.thanos.ddns.domain.Domain;
+import cloud.thanos.ddns.config.ServiceProviderConfiguration;
+import cloud.thanos.ddns.object.Domain;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
+import com.aliyuncs.alidns.model.v20150109.DescribeDomainRecordsRequest;
+import com.aliyuncs.alidns.model.v20150109.DescribeDomainRecordsResponse;
 import com.aliyuncs.alidns.model.v20150109.UpdateDomainRecordRequest;
-import com.aliyuncs.alidns.model.v20150109.UpdateDomainRecordResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 /**
  * @author leanderli
@@ -17,46 +21,53 @@ import org.slf4j.LoggerFactory;
  * @since 2019/5/18
  */
 public class AliDnsUtils {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(AliDnsUtils.class);
-
+    public static final Logger LOGGER = LoggerFactory.getLogger(AliDnsUtils.class);
     public static IAcsClient client = null;
 
     static {
         //必填固定值，必须为“cn-hanghou”
-        String regionId = AppConfiguration.regionId;
+        String regionId = ServiceProviderConfiguration.regionId;
         // your accessKey
-        String accessKeyId = AppConfiguration.accessKeyId;
+        String accessKeyId = ServiceProviderConfiguration.accessKeyId;
         // your accessSecret
-        String accessKeySecret = AppConfiguration.accessKeySecret;
+        String accessKeySecret = ServiceProviderConfiguration.accessKeySecret;
         IClientProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessKeySecret);
         client = new DefaultAcsClient(profile);
+    }
+
+    public static List<DescribeDomainRecordsResponse.Record> getDomainRecords(String rootDomain) {
+        try {
+            DescribeDomainRecordsRequest domainRecordsRequest = new DescribeDomainRecordsRequest();
+            domainRecordsRequest.setDomainName(rootDomain);
+            DescribeDomainRecordsResponse domainRecordsResponse = client.getAcsResponse(domainRecordsRequest);
+            return domainRecordsResponse.getDomainRecords();
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
      * 更新解析记录
      *
      * @param domain 域名对象
-     * @return 是否成功
      */
-    public static boolean updateResolveRecord(Domain domain) {
-        UpdateDomainRecordRequest updateRequest = new UpdateDomainRecordRequest();
-        // 初始化更新域名解析的类
-        updateRequest.setType(domain.getType());
-        // 设置新的 IP
-        updateRequest.setValue(domain.getRecordValue());
-        // 域名
-        updateRequest.setRR(domain.getResolveRecord());
-        // recordId
-        updateRequest.setRecordId(domain.getId());
+    public static void updateResolveRecord(Domain domain) {
         try {
-            UpdateDomainRecordResponse updateResponse = client.getAcsResponse(updateRequest);
-            LOGGER.info("更新解析记录完成：recordId(" + updateResponse.getRecordId() + ")");
-            return true;
+            UpdateDomainRecordRequest updateRequest = new UpdateDomainRecordRequest();
+            // 初始化更新域名解析的类
+            updateRequest.setType(domain.getType());
+            // 设置新的 IP
+            updateRequest.setValue(domain.getRecordValue());
+            // 域名
+            updateRequest.setRR(domain.getResolveRecord());
+            // recordId
+            updateRequest.setRecordId(domain.getId());
+            client.getAcsResponse(updateRequest);
         } catch (ClientException e) {
-            LOGGER.error("更新解析记录失败..." + e);
-            e.printStackTrace();
+            LOGGER.error("Error!Update resolve record failed,errorMsg="
+                    + e.getErrMsg() + ","
+                    + domain.toString());
         }
-        return false;
     }
 }

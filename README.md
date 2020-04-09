@@ -11,7 +11,7 @@
 
 一、配置文件：
 
-/resource/domain.properties
+/resource/domainImpl.properties
 
 ipQueryServer=http://www.taobao.com/help/getip.php    #用户查询本机外网IP。
 
@@ -21,7 +21,7 @@ accessKeyId=Your Ali AccessKeyId    #阿里云个人accessKeyId。
 
 accessKeySecret=Your Ali Access Key Secret    #阿里云个人accessKeySecret。
 
-rootDomain=One of your root domain which wants to update record   #想要动态修改记录的根域名，暂时只能配置一个根域名。
+rootDomain=One of your root domainImpl which wants to update record   #想要动态修改记录的根域名，暂时只能配置一个根域名。
 
 **二、启动方式**
 

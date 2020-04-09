@@ -1,9 +1,7 @@
-package cloud.thanos.ddns.domain;
+package cloud.thanos.ddns.object;
 
 import cloud.thanos.ddns.common.AliDnsUtils;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -14,9 +12,7 @@ import org.apache.commons.lang3.StringUtils;
  * @since 2019/5/18
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Domain {
+public class DomainImpl implements Domain {
 
     /**
      * ID
@@ -47,16 +43,27 @@ public class Domain {
      */
     private Long ttl;
 
+    public DomainImpl(String id, String name, String type,
+                      String resolveRecord, String resolveLine, String recordValue,
+                      Long ttl) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.resolveRecord = resolveRecord;
+        this.resolveLine = resolveLine;
+        this.recordValue = recordValue;
+        this.ttl = ttl;
+    }
 
     /**
      * 保存
      *
      * @return 是否成功
      */
-    public boolean save() {
+    @Override
+    public void save() {
         if (StringUtils.isNotBlank(this.id)) {
-            return AliDnsUtils.updateResolveRecord(this);
+            AliDnsUtils.updateResolveRecord(this);
         }
-        return false;
     }
 }
