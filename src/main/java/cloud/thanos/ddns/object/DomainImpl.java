@@ -58,7 +58,6 @@ public class DomainImpl implements Domain {
     /**
      * 保存
      *
-     * @return 是否成功
      */
     @Override
     public void save() {
