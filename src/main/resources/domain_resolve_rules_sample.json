@@ -2,10 +2,10 @@
   "description": "",
   "domain": [
     {
-      "[baidu.com]": [
+      "google.com": [
         "www",
-        "wenku",
-        "baike"
+        "mail",
+        "im"
       ]
     }
   ]

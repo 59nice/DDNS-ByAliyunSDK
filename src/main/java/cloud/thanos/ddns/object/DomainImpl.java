@@ -1,6 +1,6 @@
 package cloud.thanos.ddns.object;
 
-import cloud.thanos.ddns.common.AliDnsUtils;
+import cloud.thanos.ddns.common.utils.AliDnsUtils;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 

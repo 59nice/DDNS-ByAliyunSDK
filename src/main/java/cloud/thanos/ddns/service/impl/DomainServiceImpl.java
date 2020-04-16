@@ -1,6 +1,6 @@
 package cloud.thanos.ddns.service.impl;
 
-import cloud.thanos.ddns.common.AliDnsUtils;
+import cloud.thanos.ddns.common.utils.AliDnsUtils;
 import cloud.thanos.ddns.object.Domain;
 import cloud.thanos.ddns.object.DomainImpl;
 import cloud.thanos.ddns.service.DomainService;
@@ -20,7 +20,7 @@ import java.util.List;
 public class DomainServiceImpl implements DomainService {
 
     @Override
-    public ArrayList<Domain> getRequiresUpdateDomainRecordByFilterRule(String rootDomain, ArrayList<String> subDomainFilters) {
+    public ArrayList<Domain> getRequiresUpdateDomainRecordByResolveRule(String rootDomain, ArrayList<String> subDomainFilters) {
         List<DescribeDomainRecordsResponse.Record> domainRecords = AliDnsUtils.getDomainRecords(rootDomain);
         if (CollectionUtils.isEmpty(domainRecords)) {
             return null;

@@ -1,6 +1,6 @@
-package cloud.thanos.ddns.common;
+package cloud.thanos.ddns.common.utils;
 
-import cloud.thanos.ddns.config.ServiceProviderConfiguration;
+import cloud.thanos.ddns.config.DnsServerConfiguration;
 import cloud.thanos.ddns.object.Domain;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
@@ -26,11 +26,11 @@ public class AliDnsUtils {
 
     static {
         //必填固定值，必须为“cn-hanghou”
-        String regionId = ServiceProviderConfiguration.regionId;
+        String regionId = DnsServerConfiguration.regionId;
         // your accessKey
-        String accessKeyId = ServiceProviderConfiguration.accessKeyId;
+        String accessKeyId = DnsServerConfiguration.accessKeyId;
         // your accessSecret
-        String accessKeySecret = ServiceProviderConfiguration.accessKeySecret;
+        String accessKeySecret = DnsServerConfiguration.accessKeySecret;
         IClientProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessKeySecret);
         client = new DefaultAcsClient(profile);
     }

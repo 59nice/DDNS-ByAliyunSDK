@@ -1,6 +1,6 @@
 package cloud.thanos.ddns.config;
 
-import cloud.thanos.ddns.common.ResourceUtils;
+import cloud.thanos.ddns.common.utils.ResourceUtils;
 import com.google.gson.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -12,9 +12,9 @@ import java.util.HashMap;
  * @see
  * @since 2020.04.09
  */
-public class DomainFilterRules {
+public class DomainResolveRules {
 
-    private static final String CONFIG_FILE = "domain_filter_rules.json";
+    private static final String CONFIG_FILE = "domain_resolve_rules.json";
 
     private static ArrayList<String> rootDomains = new ArrayList<>();
     private static HashMap<String, ArrayList<String>> rules = new HashMap<>();
@@ -46,7 +46,7 @@ public class DomainFilterRules {
         return rootDomains;
     }
 
-    public static ArrayList<String> getFilterSubDomains(String rootDomain) {
+    public static ArrayList<String> getResolveSubDomains(String rootDomain) {
         return rules.get(rootDomain);
     }
 

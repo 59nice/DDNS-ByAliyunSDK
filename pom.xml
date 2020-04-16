@@ -8,6 +8,7 @@
     <artifactId>DDNS</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+
     <build>
         <finalName>thanos-cloud-ddns</finalName>
         <plugins>
@@ -50,6 +51,14 @@
     </parent>
 
     <dependencies>
+        <!--调用远程服务器上的shell-->
+        <dependency>
+            <groupId>org.jvnet.hudson</groupId>
+            <artifactId>ganymed-ssh2</artifactId>
+            <version>build210-hudson-1</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

@@ -1,9 +1,10 @@
-package cloud.thanos.ddns.common;
+package cloud.thanos.ddns.common.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
@@ -12,11 +13,16 @@ import java.util.regex.Pattern;
 /**
  * @author leanderli
  * @see
- * @since 2020.04.09
+ * @since 2020.04.16
  */
-public class IPQuery {
-
+public class NetworkUtils {
+    private static final int TIME_OUT_MILLS = 3000;
     private static final String PATTERN = "\\<dd class\\=\"fz24\">(.*?)\\<\\/dd>";
+
+    public static boolean ping(String ipAddress) throws Exception {
+        // 当返回值是true时，说明host是可用的，false则不可。
+        return InetAddress.getByName(ipAddress).isReachable(TIME_OUT_MILLS);
+    }
 
     /**
      * 获取本机的外网ip地址
@@ -56,4 +62,5 @@ public class IPQuery {
         }
         return ip;
     }
+
 }

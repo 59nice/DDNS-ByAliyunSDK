@@ -10,9 +10,9 @@ import org.apache.commons.configuration.PropertiesConfiguration;
  * @see
  * @since 2019/5/18
  */
-public class ServiceProviderConfiguration {
+public class DnsServerConfiguration {
 
-    private static final String FILE_NAME = "service_provider/aliyun.properties";
+    private static final String FILE_NAME = "dns_server/aliyun.properties";
 
     public static String regionId = "";
     public static String accessKeyId = "";

@@ -1,4 +1,4 @@
-package cloud.thanos.ddns.common;
+package cloud.thanos.ddns.common.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

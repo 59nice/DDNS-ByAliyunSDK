@@ -1,0 +1,12 @@
+{
+  "description": "",
+  "domain": [
+    {
+      "[root domain]": [
+        "sub domain1",
+        "sub domain2",
+        "..."
+      ]
+    }
+  ]
+}

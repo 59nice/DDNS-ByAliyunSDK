@@ -18,7 +18,7 @@ public interface DomainService {
      * @param subDomainFilters 过滤规则
      * @return 域名信息
      */
-    ArrayList<Domain> getRequiresUpdateDomainRecordByFilterRule(String rootDomain, ArrayList<String> subDomainFilters);
+    ArrayList<Domain> getRequiresUpdateDomainRecordByResolveRule(String rootDomain, ArrayList<String> subDomainFilters);
 
     /**
      * 更新域名信息
